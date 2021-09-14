@@ -6,11 +6,17 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
-    "body-parser": "1.15.2",
+    "body-parser": "^1.19.0",
     "express": "^4.14.0",
     "express-react-views": "^0.10.2",
+    "jsx-to-html": "^1.1.0",
     "mysql": "^2.11.1 ",
+    "node-sass": "^6.0.1",
     "react": "15.3.2",
     "react-dom": "15.3.2"
+  },
+  "devDependencies": {
+    "babel-plugin-css-modules-transform": "^1.6.2",
+    "css-loader": "^6.2.0"
   }
 }

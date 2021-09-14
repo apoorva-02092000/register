@@ -6,29 +6,52 @@ const Login = React.createClass({
   },
 
   render() {
+    const h11={
+      padding: "20px",
+      fontFamily: "Arial",
+      fontSize: 70,
+      backgroundColor:"black"
+    }; 
+    const mystyle = {
+      padding: "10px",
+      backgroundColor:"black"
+     };
+    const j={
+      width: 200, 
+      height: 40
+    };
+    const r={
+      padding: "20px",
+      backgroundColor:"black"
+
+    };
+
     return (
+      <body style={{ backgroundColor: 'khaki'
+      }}>
       <section className="column is-offset-6 is-4">
         <center>
-          <h1>Login Below</h1>
-          <p>Enter your username and password</p>
+          <h1  style={h11}>Login </h1>
+          <p style={{fontSize:50,fontFamily:"fantasy"}}>Enter your username and password</p>
           <table>
             <form action="/login" method="post">
               <tr>
-                <td>Username</td>
-                <td><input type="text" name="username"/></td>
+                <td style={{fontSize:30,padding:"10px"}}>Username</td>
+                <td><input style={j} type="text" name="username"/></td>
               </tr>
               <tr>
-                <td>Password</td>
-                <td><input type="password" name="pwd"/></td>
+                <td style={{fontSize:30,padding:"10px"}}>Password</td>
+                <td><input style={j} type="password" name="pwd"/></td>
               </tr>
               <tr>
-                <td colspan="2" align="center"><input type="submit" value="Login" name="regOrLogin" class="class1"/></td>
+                <td colspan="2" align="center"><input type="submit" style={r} value="Login" name="regOrLogin" class="class1"/></td>
               </tr>
             </form>
           </table>
-          <td align="center" colspan="2"><a href='/register' ><button>Register</button></a></td>
+          <td align="center" colspan="2"><a href='/register' ><button style={mystyle}>Go to registration page</button></a></td>
         </center>
       </section>
+      </body>
     )
   },
 })

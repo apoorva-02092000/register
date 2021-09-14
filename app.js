@@ -19,7 +19,7 @@ var mysql = require("mysql");
 var connection = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "apple",
+	password: "Morley@99",
 	database: "test"
 });
 
@@ -38,7 +38,9 @@ app.post("/register", urlEncodedParser, function(request, response) {
 					var body = request.body;
 					var date = new Date();
 					var currentDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay();
-					var postVars = {username: body.username, password: hash, dob: body.dob, reg_date: currentDate};
+					console.log(body.fname)
+					console.log(body)
+					var postVars = {fname:body.fname,lname:body.lname,dob: body.dob, hname:body.hname,username: body.username, pwd: body.pwd,cpwd:body.cpwd};
 					// insertion into MySQL
 					connection.query("SELECT * FROM user WHERE username='"+body.username+"'", function(err, res, fields){
 						if(err) {
@@ -74,13 +76,18 @@ app.post("/login", urlEncodedParser, function(request, response) {
 					response.render( "Error.jsx", {error: 'Username and Password is not correct'});
 				} else {
 					if(res.length) {
-						bcrypt.compare(body.pwd, res[0].password, function(err, res) {
-							if(res) {
-								response.render( "Welcome.jsx", {name: body.username});
-							} else {
-								response.render( "Error.jsx", {error: 'Password is not correct'});
-							}
-						});
+						// bcrypt.compare(body.pwd, res[0].password, function(err, res) {
+						// 	if(res) {
+						// 		response.render( "Welcome.jsx", {name: body.username});
+						// 	} else {
+						// 		response.render( "Error.jsx", {error: 'Password is not correct ' + err});
+						// 	}
+						// });
+						if(body.pwd === res[0].pwd){
+							response.render("Welcome.jsx", {name: body.username})
+						}else{
+							response.render( "Error.jsx", {error: 'Password is not correct '});
+						}
 					} else {
 						response.render( "Error.jsx", {error: 'Username is not correct'});
 					}
