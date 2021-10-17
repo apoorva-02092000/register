@@ -49,6 +49,9 @@ const Login = React.createClass({
             </form>
           </table>
           <td align="center" colspan="2"><a href='/register' ><button style={mystyle}>Go to registration page</button></a></td>
+          
+          <td align="center" colspan="2"><a href='/reset' ><button style={mystyle}>Reset Password</button></a></td>
+
         </center>
       </section>
       </body>

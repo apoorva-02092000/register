@@ -78,6 +78,12 @@ const Register = React.createClass({
               </tbody>
               <tbody>
               <tr>
+                <td style={{fontSize:30,padding:"10px"}}>Security Question(Name of the town you were born in)</td>
+                <td style={{boxSizing:60}}><input style={j} type="text" name="security"/></td>
+              </tr>
+              </tbody>
+              <tbody>
+              <tr>
                 <td align="center" colspan="2"><input  style={r} type="submit"value="Register" name="regOrLogin" class="class1"/></td>
                 <td></td>
               </tr>

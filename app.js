@@ -29,6 +29,23 @@ connection.connect();
 // requesting express to get data as text
 app.use(bodyParser.text());
 
+app.post("/reset", urlEncodedParser, function(request, response){
+	if(request.url != "/favicon.ico"){
+		var body = request.body;
+		connection.query("SELECT * FROM user WHERE username='" + body.username + "'", function(err, res, fields){
+			if(err){
+				response.render("Error.jsx", {error: "Username not found"})
+			}else{
+				if(res[0].security_ques === body.answer){
+					console.log(body.pwd);
+					connection.query("UPDATE user SET pwd = '" + body.pwd + "', cpwd = '" + body.cpwd + "' WHERE username = '" + body.username + "'")
+					connection.commit();
+					response.render("Login.jsx")
+				}
+			}
+		});
+	}
+});
 // using express for post method
 app.post("/register", urlEncodedParser, function(request, response) {
 	if(request.url!="/favicon.ico") {
@@ -38,9 +55,7 @@ app.post("/register", urlEncodedParser, function(request, response) {
 					var body = request.body;
 					var date = new Date();
 					var currentDate = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDay();
-					console.log(body.fname)
-					console.log(body)
-					var postVars = {fname:body.fname,lname:body.lname,dob: body.dob, hname:body.hname,username: body.username, pwd: body.pwd,cpwd:body.cpwd};
+					var postVars = {fname:body.fname,lname:body.lname,dob: body.dob, hname:body.hname,username: body.username, pwd: body.pwd,cpwd:body.cpwd, security_ques: body.security};
 					// insertion into MySQL
 					connection.query("SELECT * FROM user WHERE username='"+body.username+"'", function(err, res, fields){
 						if(err) {
@@ -104,6 +119,10 @@ app.get('/', function(req, res) {
 
 app.get('/register', function(req, res) {
 	res.render('Register.jsx');
+});
+
+app.get('/reset', function(req, res){
+	res.render('Reset.jsx');
 });
 
 app.listen(3000);
